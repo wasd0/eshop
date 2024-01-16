@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://task-hunter-user-db/postgres
+  flyway:
+    url: jdbc:postgresql://task-hunter-user-db/postgres
+    user: postgres
+    password: postgres
