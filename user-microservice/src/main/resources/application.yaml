@@ -2,12 +2,14 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: user-microservice
   datasource:
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://task-hunter-user-db/postgres
+    url: jdbc:postgresql://eshop-user-db/postgres
   flyway:
-    url: jdbc:postgresql://task-hunter-user-db/postgres
+    url: jdbc:postgresql://eshop-user-db/postgres
     user: postgres
     password: postgres
