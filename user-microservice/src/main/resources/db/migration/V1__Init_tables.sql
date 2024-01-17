@@ -1,4 +1,4 @@
-create table users
+create table if not exists users
 (
     id bigserial primary key,
     username varchar(50) not null unique,
@@ -7,13 +7,13 @@ create table users
     registered_at date not null default current_date
 );
 
-create table roles
+create table if not exists roles
 (
     id bigserial primary key,
     name varchar(50) not null unique
 );
 
-create table users_roles
+create table if not exists users_roles
 (
     user_id bigint not null,
     role_id bigint not null,
