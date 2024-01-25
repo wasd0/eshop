@@ -8,8 +8,8 @@ spring:
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://eshop-user-db/postgres
+    url: jdbc:postgresql://localhost:32771/postgres
   flyway:
-    url: jdbc:postgresql://eshop-user-db/postgres
+    url: jdbc:postgresql://localhost:32771/postgres
     user: postgres
     password: postgres
