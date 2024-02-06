@@ -2,17 +2,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.wasd</groupId>
-        <artifactId>eshop</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.2</version>
+        <relativePath/>
     </parent>
+    
+    <groupId>com.wasd</groupId>
     <artifactId>user-microservice</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     
     <properties>
         <spring-boot.version>3.2.2</spring-boot.version>
         <flyway.version>10.4.1</flyway.version>
+
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <docker.image.prefix>eshop</docker.image.prefix>
+
     </properties>
     
     <dependencies>
@@ -69,11 +77,29 @@
             <artifactId>jedis</artifactId>
             <version>5.1.0</version>
         </dependency>
-
-
+        
     </dependencies>
     
     <build>
-        <finalName>user-microservice</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <image>${docker.image.prefix}/${project.artifactId}:latest</image>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
 </project>
