@@ -8,11 +8,15 @@ spring:
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://database/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
   flyway:
-    url: jdbc:postgresql://database/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     user: postgres
     password: postgres
-  
   jpa:
     show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123
