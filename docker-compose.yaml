@@ -30,16 +30,22 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile-user-service
-    environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql://user-service-database/postgres"
-      - "SPRING_FLYWAY_URL=jdbc:postgresql://user-service-database/postgres"
     ports:
       - '8081:8081'
+    depends_on:
+      config-server:
+        condition: service_started
+  # Config server
+  config-server:
+    container_name: 'config-server'
+    ports:
+      - '8082:8082'
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-config-server
     depends_on:
       user-service-database:
         condition: service_healthy
       user-service-cache:
         condition: service_started
-        
-        

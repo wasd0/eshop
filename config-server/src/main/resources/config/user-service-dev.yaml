@@ -2,8 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: user-microservice
   datasource:
     password: postgres
     username: postgres
