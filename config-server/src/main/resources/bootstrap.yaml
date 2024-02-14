@@ -9,7 +9,6 @@ spring:
   
   cloud:
     config:
-      uri: http://localhost:8082
       server:
         native:
           search-locations: classpath:/config
@@ -17,3 +16,4 @@ spring:
           uri: https://github.com/wasd0/eshop.git
           search-paths: /tree/master/config-server/src/main/resources/config
           default-label: master
+      enabled: false

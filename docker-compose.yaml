@@ -10,6 +10,10 @@ services:
     command: bash -c "redis-server --appendonly yes --requirepass 123"
     ports:
       - '6379:6379'
+    networks:
+      backend:
+        aliases:
+          - "cache"
   user-service-database:
     image: 'postgres:15.0'
     container_name: 'user-service-database'
@@ -25,6 +29,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      backend:
+        aliases:
+          - "database"
   user-service-backend:
     container_name: 'user-service-backend'
     build:
@@ -32,8 +40,14 @@ services:
       dockerfile: dockerfiles/Dockerfile-user-service
     ports:
       - '8081:8081'
+    networks:
+      - backend
     depends_on:
       config-server:
+        condition: service_started
+      user-service-database:
+        condition: service_healthy
+      user-service-cache:
         condition: service_started
   # Config server
   config-server:
@@ -44,8 +58,11 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile-config-server
-    depends_on:
-      user-service-database:
-        condition: service_healthy
-      user-service-cache:
-        condition: service_started
+    networks:
+      backend:
+        aliases:
+          - "configserver"
+
+networks:
+  backend:
+    driver: bridge

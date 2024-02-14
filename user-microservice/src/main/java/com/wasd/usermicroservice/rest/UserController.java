@@ -37,7 +37,7 @@ public class UserController {
     public UserResponse update(@PathVariable Long id, @RequestBody UserRequest request) throws UserNotFoundException, UserAlreadyExistsException {
         return userService.update(id, request);
     }
-    
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) throws UserNotFoundException {
