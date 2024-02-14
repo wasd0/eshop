@@ -16,3 +16,4 @@ spring:
         git:
           uri: https://github.com/wasd0/eshop.git
           search-paths: /tree/master/config-server/src/main/resources/config
+          default-label: master
