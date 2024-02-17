@@ -38,7 +38,7 @@ public class UserJdbcRepository implements UserRepository {
         }
     }
 
-    @Override
+    @Override   
     public Optional<User> findByUsername(String username) {
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(

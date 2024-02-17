@@ -6,6 +6,7 @@ import com.wasd.usermicroservice.exception.UserAlreadyExistsException;
 import com.wasd.usermicroservice.exception.UserNotFoundException;
 import com.wasd.usermicroservice.persistence.model.User;
 import com.wasd.usermicroservice.persistence.repository.UserRepository;
+import com.wasd.usermicroservice.service.SecurityService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,8 @@ class UserServiceImplTest {
     UserServiceImpl userService;
     @Mock
     UserRepository userJdbcRepository;
+    @Mock
+    SecurityService securityService;
     
     @Test
     void findAll_whenUsersExists_returnsUserResponseList() {
@@ -62,7 +65,8 @@ class UserServiceImplTest {
     
     @Test
     void save_whenUniqueUsername_saveNewUser() throws UserAlreadyExistsException {
-        when(userJdbcRepository.findByUsername(any())).thenReturn(Optional.empty());
+        when(userJdbcRepository.findByUsername("test")).thenReturn(Optional.empty());
+        when(securityService.encodePassword("")).thenReturn("123");
         UserRequest request = new UserRequest("test", "", "");
         UserResponse response = userService.save(request);
         verify(userJdbcRepository, times(1)).save(any());

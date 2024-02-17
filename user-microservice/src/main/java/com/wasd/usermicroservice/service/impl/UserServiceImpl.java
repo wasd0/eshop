@@ -6,6 +6,7 @@ import com.wasd.usermicroservice.exception.UserAlreadyExistsException;
 import com.wasd.usermicroservice.exception.UserNotFoundException;
 import com.wasd.usermicroservice.persistence.model.User;
 import com.wasd.usermicroservice.persistence.repository.UserRepository;
+import com.wasd.usermicroservice.service.SecurityService;
 import com.wasd.usermicroservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final SecurityService securityService;
 
     @Override
     public List<UserResponse> findAll() {
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistsException(request.username());
         }
 
-        User user = mapCreateRequestToUser(request);
+        User user = createUserFromRequest(request);
         userRepository.save(user);
 
         return mapUserToResponse(user);
@@ -58,7 +60,7 @@ public class UserServiceImpl implements UserService {
         
         foundById.setUsername(request.username());
         foundById.setEmail(request.email());
-        foundById.setPassword(request.password());
+        foundById.setPassword(securityService.encodePassword(request.password()));
 
         userRepository.update(foundById);
 
@@ -71,11 +73,11 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(userFromDb);
     }
 
-    private User mapCreateRequestToUser(UserRequest request) {
+    private User createUserFromRequest(UserRequest request) {
         return User.builder()
                 .username(request.username())
                 .email(request.email())
-                .password(request.password())
+                .password(securityService.encodePassword(request.password()))
                 .registeredAt(LocalDateTime.now())
                 .build();
     }
