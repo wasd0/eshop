@@ -32,7 +32,7 @@ services:
     networks:
       backend:
         aliases:
-          - "database"
+          - "user-database"
   user-service-backend:
     container_name: 'user-service-backend'
     build:
@@ -63,6 +63,57 @@ services:
         aliases:
           - "configserver"
 
+#Product service
+
+  product-service-cache:
+    container_name: 'product-service-cache'
+    image: redis:7
+    restart: on-failure
+    command: bash -c "redis-server --appendonly yes --requirepass 123"
+    ports:
+      - '6380:6380'
+    networks:
+      backend:
+        aliases:
+          - "cache"
+  product-service-database:
+    image: 'postgres:15.0'
+    container_name: 'product-service-database'
+    environment:
+      - 'POSTGRES_DB=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+      - 'PGUSER=postgres'
+    ports:
+      - '5433:5433'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      backend:
+        aliases:
+          - "product-database"
+  product-service-backend:
+    container_name: 'product-service-backend'
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-product-service
+    ports:
+      - '8083:8083'
+    networks:
+      - backend
+    depends_on:
+      config-server:
+        condition: service_started
+      product-service-database:
+        condition: service_healthy
+      product-service-cache:
+        condition: service_started
+
+  
 networks:
   backend:
     driver: bridge
+  
