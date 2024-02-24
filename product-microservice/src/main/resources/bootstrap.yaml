@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: product-service
+  profiles:
+    active: dev
+  cloud:
+    config:
+      profile: dev
+      retry:
+        max-attempts: 20
+  config:
+    import: optional:configserver:http://configserver:8082
