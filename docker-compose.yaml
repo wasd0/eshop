@@ -13,7 +13,7 @@ services:
     networks:
       backend:
         aliases:
-          - "cache"
+          - "user-cache"
   user-service-database:
     image: 'postgres:15.0'
     container_name: 'user-service-database'
@@ -71,11 +71,11 @@ services:
     restart: on-failure
     command: bash -c "redis-server --appendonly yes --requirepass 123"
     ports:
-      - '6380:6380'
+      - '6380:6379'
     networks:
       backend:
         aliases:
-          - "cache"
+          - "product-cache"
   product-service-database:
     image: 'postgres:15.0'
     container_name: 'product-service-database'
