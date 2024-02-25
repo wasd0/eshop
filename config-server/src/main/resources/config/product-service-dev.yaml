@@ -15,6 +15,6 @@ spring:
     show-sql: true
   data:
     redis:
-      host: localhost
-      port: 6380
+      host: product-cache
+      port: 6379
       password: 123
