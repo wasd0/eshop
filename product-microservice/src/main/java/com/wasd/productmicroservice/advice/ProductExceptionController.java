@@ -14,7 +14,7 @@ public class ProductExceptionController {
 
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public HttpExceptionResponse userNotFound(ProductNotFoundException exception) {
+    public HttpExceptionResponse productNotFound(ProductNotFoundException exception) {
         return new HttpExceptionResponse(HttpStatus.NOT_FOUND, exception.getMessage(), LocalDateTime.now());
     }
 }
