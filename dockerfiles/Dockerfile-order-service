@@ -2,14 +2,14 @@ FROM maven:3.9.0-eclipse-temurin-17 AS build
 WORKDIR app
 
 COPY ../pom.xml pom.xml
-COPY ../product-microservice/src product-microservice/src
-COPY ../product-microservice/pom.xml product-microservice/pom.xml
+COPY ../order-microservice/src order-microservice/src
+COPY ../order-microservice/pom.xml order-microservice/pom.xml
 
-RUN mvn clean package -f product-microservice/pom.xml &&  \
-    java -Djarmode=layertools -jar product-microservice/target/product-microservice-0.0.1-SNAPSHOT.jar extract --destination extracted
+RUN mvn clean package -f order-microservice/pom.xml &&  \
+    java -Djarmode=layertools -jar order-microservice/target/order-microservice-0.0.1-SNAPSHOT.jar extract --destination extracted
 
 FROM eclipse-temurin:17-jre
-ARG JAR_FILE=product-microservice-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=order-microservice-0.0.1-SNAPSHOT.jar
 WORKDIR app
 
 COPY --from=build app/extracted/dependencies/ ./
