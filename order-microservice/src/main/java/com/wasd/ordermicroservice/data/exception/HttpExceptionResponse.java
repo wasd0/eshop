@@ -1,4 +1,4 @@
-package com.wasd.productmicroservice.data.exception;
+package com.wasd.ordermicroservice.data.exception;
 
 import org.springframework.http.HttpStatus;
 

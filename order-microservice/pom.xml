@@ -8,7 +8,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>product-microservice</artifactId>
+    <artifactId>order-microservice</artifactId>
     <packaging>jar</packaging>
 
     <name>product-microservice</name>

@@ -63,10 +63,10 @@ services:
         aliases:
           - "configserver"
 
-#Product service
+#Order service
 
-  product-service-cache:
-    container_name: 'product-service-cache'
+  order-service-cache:
+    container_name: 'order-service-cache'
     image: redis:7
     restart: on-failure
     command: bash -c "redis-server --appendonly yes --requirepass 123"
@@ -75,10 +75,10 @@ services:
     networks:
       backend:
         aliases:
-          - "product-cache"
-  product-service-database:
+          - "order-cache"
+  order-service-database:
     image: 'postgres:15.0'
-    container_name: 'product-service-database'
+    container_name: 'order-service-database'
     environment:
       - 'POSTGRES_DB=postgres'
       - 'POSTGRES_PASSWORD=postgres'
@@ -94,12 +94,12 @@ services:
     networks:
       backend:
         aliases:
-          - "productdb"
-  product-service-backend:
-    container_name: 'product-service-backend'
+          - "orderdb"
+  order-service-backend:
+    container_name: 'order-service-backend'
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile-product-service
+      dockerfile: dockerfiles/Dockerfile-order-service
     ports:
       - '8083:8083'
     networks:
@@ -107,9 +107,9 @@ services:
     depends_on:
       config-server:
         condition: service_started
-      product-service-database:
+      order-service-database:
         condition: service_healthy
-      product-service-cache:
+      order-service-cache:
         condition: service_started
 
   

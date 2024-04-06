@@ -1,7 +1,7 @@
-package com.wasd.productmicroservice.advice;
+package com.wasd.ordermicroservice.advice;
 
-import com.wasd.productmicroservice.data.exception.HttpExceptionResponse;
-import com.wasd.productmicroservice.exception.ProductNotFoundException;
+import com.wasd.ordermicroservice.data.exception.HttpExceptionResponse;
+import com.wasd.ordermicroservice.exception.OrderNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class ProductExceptionController {
 
-    @ExceptionHandler(ProductNotFoundException.class)
+    @ExceptionHandler(OrderNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public HttpExceptionResponse userNotFound(ProductNotFoundException exception) {
+    public HttpExceptionResponse orderNotFound(OrderNotFoundException exception) {
         return new HttpExceptionResponse(HttpStatus.NOT_FOUND, exception.getMessage(), LocalDateTime.now());
     }
 }
