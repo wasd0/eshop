@@ -1,4 +1,4 @@
-package com.wasd.productmicroservice.exception;
+package com.wasd.ordermicroservice.exception;
 
 public class OrderNotFoundException extends Exception {
     public OrderNotFoundException(Long productId) {

@@ -1,4 +1,4 @@
-package com.wasd.productmicroservice.config;
+package com.wasd.ordermicroservice.config;
 
 import lombok.Getter;
 import lombok.Setter;
