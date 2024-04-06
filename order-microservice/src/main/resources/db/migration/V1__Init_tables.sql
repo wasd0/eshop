@@ -36,9 +36,10 @@ create table if not exists orders
 
 create table if not exists order_details
 (
-    id          bigint  not null unique,
-    price       decimal not null,
-    customer_id bigint  not null,
+    id          bigint       not null unique,
+    title       varchar(100) not null,
+    price       decimal      not null,
+    customer_id bigint       not null,
     constraint order_id_fk foreign key (id) references orders (id)
 );
 
