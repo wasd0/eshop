@@ -1,7 +1,5 @@
-package com.wasd.usermicroservice.persistence.repository.impl;
+package com.wasd.usermicroservice.persistence.user;
 
-import com.wasd.usermicroservice.persistence.model.User;
-import com.wasd.usermicroservice.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,14 +21,15 @@ public class UserJdbcRepository implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return jdbcTemplate.query("select * from users", this::mapRowToUser);
+        return jdbcTemplate.query("select id, email, registered_at, username, password " +
+                "from users", this::mapRowToUser);
     }
 
     @Override
     public Optional<User> findById(Long id) {
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(
-                    "select * from users where id = ?",
+                    "select id, email, registered_at, username, password from users where id = ?",
                     this::mapRowToUser,
                     id));
         } catch (EmptyResultDataAccessException exception) {
@@ -38,7 +37,7 @@ public class UserJdbcRepository implements UserRepository {
         }
     }
 
-    @Override   
+    @Override
     public Optional<User> findByUsername(String username) {
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(
@@ -67,7 +66,7 @@ public class UserJdbcRepository implements UserRepository {
 
         jdbcTemplate.update(psc, generatedKeyHolder);
         Map<String, Object> keys = generatedKeyHolder.getKeys();
-        
+
         if (keys != null) {
             user.setId((Long) keys.get("id"));
         }
