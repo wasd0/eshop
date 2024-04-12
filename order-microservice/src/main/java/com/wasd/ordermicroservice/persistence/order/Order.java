@@ -2,19 +2,20 @@ package com.wasd.ordermicroservice.persistence.order;
 
 
 import com.wasd.ordermicroservice.data.order.OrderState;
-import jdk.jfr.Category;
+import com.wasd.ordermicroservice.persistence.brand.Brand;
+import com.wasd.ordermicroservice.persistence.category.ProductCategory;
+import com.wasd.ordermicroservice.persistence.seller.Seller;
 import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Order {
-    private long id;
+    private Long id;
     private OrderState state;
-    private long version;
+    private Long version;
     private Seller seller;
-    private Category category;
+    private ProductCategory productCategory;
     private Brand brand;
 }
