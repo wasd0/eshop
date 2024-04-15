@@ -8,7 +8,10 @@ import com.wasd.ordermicroservice.persistence.seller.Seller;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = {"seller", "category", "brand"})
+@ToString(exclude = {"seller", "category", "brand"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -21,18 +24,12 @@ public class Order {
     private OrderState state;
     @Column(name = "version", nullable = false)
     private Long version;
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
     private Seller seller;
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;

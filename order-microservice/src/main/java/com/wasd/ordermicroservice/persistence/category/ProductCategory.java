@@ -7,7 +7,9 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"parent", "children", "orders"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -20,16 +22,10 @@ public class ProductCategory {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @OrderBy
     @JoinColumn(name = "parent_id")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private ProductCategory parent = null;
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private Set<ProductCategory> children = new HashSet<>();
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private Set<Order> orders = new HashSet<>();
 
     public void addCategory(ProductCategory category) {

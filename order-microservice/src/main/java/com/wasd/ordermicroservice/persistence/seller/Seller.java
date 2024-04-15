@@ -7,7 +7,10 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"orders"})
+@EqualsAndHashCode(exclude = {"orders"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,8 +25,6 @@ public class Seller {
     @Column(name = "TIN", nullable = false, unique = true)
     private Integer tin;
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private Set<Order> orders = new HashSet<>();
 
     public void addOrder(Order order) {
