@@ -15,10 +15,10 @@ create table if not exists categories
 
 create table if not exists sellers
 (
-    id          bigserial not null primary key,
-    title       varchar(255),
+    id          bigserial    not null primary key,
+    title       varchar(255) not null,
     description varchar(300),
-    TIN         int       not null unique
+    TIN         int          not null unique
 );
 
 create table if not exists orders

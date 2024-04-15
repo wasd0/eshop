@@ -13,6 +13,9 @@ spring:
     password: postgres
   jpa:
     show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
   data:
     redis:
       host: localhost

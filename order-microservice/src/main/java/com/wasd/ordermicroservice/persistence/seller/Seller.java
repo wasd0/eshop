@@ -1,17 +1,38 @@
 package com.wasd.ordermicroservice.persistence.seller;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.wasd.ordermicroservice.persistence.order.Order;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@Setter
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "sellers")
 public class Seller {
+    @Id
     private Long id;
+    @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "description", length = 300)
     private String description;
+    @Column(name = "TIN", nullable = false, unique = true)
     private Integer tin;
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Order> orders = new HashSet<>();
+
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setSeller(this);
+    }
+
+    public void removeOrder(Order order) {
+        orders.remove(order);
+        order.setSeller(null);
+    }
 }

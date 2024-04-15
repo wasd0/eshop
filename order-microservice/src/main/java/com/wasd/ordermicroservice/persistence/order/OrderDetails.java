@@ -1,16 +1,27 @@
 package com.wasd.ordermicroservice.persistence.order;
 
 import com.wasd.ordermicroservice.data.order.Money;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "order_details")
 public class OrderDetails {
-    private Order order;
+    @Id
+    private Long id;
+    @Embedded
+    @AttributeOverride(name = "amount", column = @Column(name = "price", nullable = false))
     private Money price;
+    @Column(name = "title", length = 100, nullable = false)
     private String title;
-    private long customerId;
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Order order;
 }
