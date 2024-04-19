@@ -1,7 +1,7 @@
 package com.wasd.ordermicroservice.service.order;
 
 import com.wasd.ordermicroservice.data.order.OrderResponse;
-import com.wasd.ordermicroservice.exception.OrderNotFoundException;
+import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.persistence.order.Order;
 import com.wasd.ordermicroservice.persistence.order.OrderRepository;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ class OrderServiceImplTest {
     OrderRepository orderRepository;
 
     @Test
-    void findAll_whenOrdersExists_returnsUserResponseList() {
+    void findAll_whenOrdersExists_returnsOrderResponseList() {
         when(orderRepository.findAll()).thenReturn(List.of(new Order(), new Order()));
         List<OrderResponse> result = orderService.findAll();
         Assertions.assertNotNull(result);
@@ -41,7 +41,7 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void findById_whenCorrectId_returnsOrderResponse() {
+    void findById_whenCorrectId_returnsOrderResponse() throws NotFoundException {
         Long id = 1L;
         Order order = new Order();
         when(orderRepository.findById(id)).thenReturn(Optional.of(order));
@@ -50,9 +50,9 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void findById_whenIncorrectId_throwsOrderNotFoundException() {
+    void findById_whenIncorrectId_throwsNotFoundException() {
         Long orderId = 1L;
         when(orderRepository.findById(orderId)).thenReturn(Optional.empty());
-        Assertions.assertThrows(OrderNotFoundException.class, () -> orderService.findById(orderId));
+        Assertions.assertThrows(NotFoundException.class, () -> orderService.findById(orderId));
     }
 }
