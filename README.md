@@ -1,4 +1,6 @@
-# eshop
+# eshop 
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wasd0_eshop&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wasd0_eshop)
 
 ## Interaction of services 
 
