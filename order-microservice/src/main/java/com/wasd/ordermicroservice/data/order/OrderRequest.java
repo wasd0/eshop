@@ -1,4 +1,7 @@
 package com.wasd.ordermicroservice.data.order;
 
-public record OrderRequest(String state, Long sellerId, Long categoryId, Integer brandId) {
+import java.math.BigDecimal;
+
+public record OrderRequest(Long sellerId, Long categoryId, Integer brandId, BigDecimal price,
+                           Long customerId) {
 }

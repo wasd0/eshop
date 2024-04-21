@@ -18,10 +18,12 @@ import lombok.*;
 @Table(name = "orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "state", length = 50, nullable = false)
     private OrderState state;
+    @Version
     @Column(name = "version", nullable = false)
     private Long version;
     @ManyToOne(fetch = FetchType.LAZY)
