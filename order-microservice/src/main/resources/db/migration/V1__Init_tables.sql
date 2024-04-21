@@ -24,7 +24,7 @@ create table if not exists sellers
 create table if not exists orders
 (
     id          bigserial   not null primary key,
-    state       varchar(50) not null,
+    state       varchar(50) not null default 'PENDING',
     version     bigint      not null,
     seller_id   bigint      not null,
     category_id bigint      not null,
@@ -36,10 +36,10 @@ create table if not exists orders
 
 create table if not exists order_details
 (
-    id          bigint       not null unique,
-    title       varchar(100) not null,
-    price       decimal      not null,
-    customer_id bigint       not null,
+    id          bigint  not null unique,
+    price       decimal not null,
+    created_on  timestamp default now(),
+    customer_id bigint  not null,
     constraint order_id_fk foreign key (id) references orders (id)
 );
 
