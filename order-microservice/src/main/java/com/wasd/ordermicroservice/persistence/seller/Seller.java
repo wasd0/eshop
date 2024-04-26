@@ -1,6 +1,6 @@
 package com.wasd.ordermicroservice.persistence.seller;
 
-import com.wasd.ordermicroservice.persistence.order.Order;
+import com.wasd.ordermicroservice.persistence.order.OrderDetails;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,14 +25,14 @@ public class Seller {
     @Column(name = "TIN", nullable = false, unique = true)
     private Integer tin;
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
+    private Set<OrderDetails> orders = new HashSet<>();
 
-    public void addOrder(Order order) {
+    public void addOrderDetails(OrderDetails order) {
         orders.add(order);
         order.setSeller(this);
     }
 
-    public void removeOrder(Order order) {
+    public void removeOrderDetails(OrderDetails order) {
         orders.remove(order);
         order.setSeller(null);
     }

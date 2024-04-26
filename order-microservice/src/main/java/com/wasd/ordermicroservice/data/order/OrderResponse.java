@@ -1,4 +1,6 @@
 package com.wasd.ordermicroservice.data.order;
 
-public record OrderResponse(Long id, OrderState state, Long version) {
+import java.time.Instant;
+
+public record OrderResponse(Long id, Money price, Instant createdOn, Long customerId) {
 }

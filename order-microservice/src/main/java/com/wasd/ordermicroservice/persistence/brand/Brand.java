@@ -1,6 +1,6 @@
 package com.wasd.ordermicroservice.persistence.brand;
 
-import com.wasd.ordermicroservice.persistence.order.Order;
+import com.wasd.ordermicroservice.persistence.order.OrderDetails;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,14 +23,14 @@ public class Brand {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
+    private Set<OrderDetails> orders = new HashSet<>();
 
-    public void addOrder(Order order) {
+    public void addOrder(OrderDetails order) {
         orders.add(order);
         order.setBrand(this);
     }
 
-    public void removeOrder(Order order) {
+    public void removeOrder(OrderDetails order) {
         orders.remove(order);
         order.setBrand(null);
     }

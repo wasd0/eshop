@@ -21,9 +21,9 @@ create table if not exists sellers
     TIN         int          not null unique
 );
 
-create table if not exists orders
+create table if not exists order_details
 (
-    id          bigserial   not null primary key,
+    id          bigint      not null unique,
     state       varchar(50) not null default 'PENDING',
     version     bigint      not null,
     seller_id   bigint      not null,
@@ -31,16 +31,16 @@ create table if not exists orders
     brand_id    int         not null,
     constraint seller_id_fk foreign key (seller_id) references sellers (id),
     constraint category_id_fk foreign key (category_id) references categories (id),
-    constraint brand_id_fk foreign key (brand_id) references brands (id)
+    constraint brand_id_fk foreign key (brand_id) references brands (id),
+    constraint order_id_fk foreign key (id) references orders (id)
 );
 
-create table if not exists order_details
+create table if not exists orders
 (
-    id          bigint  not null unique,
-    price       decimal not null,
+    id          bigserial not null primary key,
+    price       decimal   not null,
     created_on  timestamp default now(),
-    customer_id bigint  not null,
-    constraint order_id_fk foreign key (id) references orders (id)
+    customer_id bigint    not null
 );
 
 create index if not exists order_brands_index on orders (brand_id);

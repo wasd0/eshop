@@ -1,6 +1,6 @@
 package com.wasd.ordermicroservice.persistence.category;
 
-import com.wasd.ordermicroservice.persistence.order.Order;
+import com.wasd.ordermicroservice.persistence.order.OrderDetails;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +26,7 @@ public class ProductCategory {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<ProductCategory> children = new HashSet<>();
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
+    private Set<OrderDetails> orders = new HashSet<>();
 
     public void addCategory(ProductCategory category) {
         children.add(category);
@@ -38,12 +38,12 @@ public class ProductCategory {
         category.setParent(null);
     }
 
-    public void addOrder(Order order) {
+    public void addOrderDetails(OrderDetails order) {
         orders.add(order);
         order.setCategory(this);
     }
 
-    public void removeOrder(Order order) {
+    public void removeOrderDetails(OrderDetails order) {
         orders.remove(order);
         order.setCategory(null);
     }
