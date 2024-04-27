@@ -24,7 +24,8 @@ public class Order {
     private Instant createdOn;
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", nullable = false, unique = true)
     @MapsId
-    private Order details;
+    private OrderDetails details;
 }
