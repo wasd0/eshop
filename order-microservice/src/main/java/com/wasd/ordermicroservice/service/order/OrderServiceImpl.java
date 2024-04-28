@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void create(OrderRequest request) throws OrderCreationException {
         try {
-            orderRepository.create(request.sellerId(),
+            orderRepository.save(request.sellerId(),
                     request.categoryId(),
                     request.brandId(),
                     request.price(),

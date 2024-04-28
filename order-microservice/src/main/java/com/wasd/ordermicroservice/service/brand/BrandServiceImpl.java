@@ -1,5 +1,6 @@
 package com.wasd.ordermicroservice.service.brand;
 
+import com.wasd.ordermicroservice.data.brand.BrandRequest;
 import com.wasd.ordermicroservice.data.brand.BrandResponse;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.persistence.brand.Brand;
@@ -16,10 +17,10 @@ public class BrandServiceImpl implements BrandService {
 
     @Transactional
     @Override
-    public BrandResponse create(String title, String description) {
+    public BrandResponse create(BrandRequest request) {
         Brand brand = new Brand();
-        brand.setTitle(title);
-        brand.setDescription(description);
+        brand.setTitle(request.title());
+        brand.setDescription(request.description());
         brandRepository.save(brand);
         return BrandMapper.INSTANCE.brandToResponse(brand);
     }

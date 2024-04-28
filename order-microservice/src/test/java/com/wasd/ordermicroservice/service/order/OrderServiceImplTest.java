@@ -64,13 +64,13 @@ class OrderServiceImplTest {
     void create_withCorrectRequestData_savesAndReturnsResponse() {
         OrderRequest request = new OrderRequest(0L, 0L, 0, BigDecimal.TEN, 0L);
         Assertions.assertDoesNotThrow(() -> orderService.create(request));
-        verify(orderRepository, times(1)).create(0L, 0L, 0, BigDecimal.TEN, 0L);
+        verify(orderRepository, times(1)).save(0L, 0L, 0, BigDecimal.TEN, 0L);
     }
 
     @Test
     void create_withIncorrectRequestData_throwsOrderCreationException() {
         OrderRequest request = new OrderRequest(0L, 0L, 0, BigDecimal.TEN, 0L);
-        willThrow(RuntimeException.class).given(orderRepository).create(0L, 0L, 0, BigDecimal.TEN, 0L);
+        willThrow(RuntimeException.class).given(orderRepository).save(0L, 0L, 0, BigDecimal.TEN, 0L);
         Assertions.assertThrows(OrderCreationException.class, () -> orderService.create(request));
     }
 }

@@ -17,9 +17,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             insert
             into orders (id, price, created_on, customer_id)
             values ((select id from details_id), :price, now(), :customerId);""", nativeQuery = true)
-    void create(@Param("sellerId") Long sellerId,
-                @Param("categoryId") Long categoryId,
-                @Param("brandId") Integer brandId,
-                @Param("price") BigDecimal price,
-                @Param("customerId") Long customerId);
+    void save(@Param("sellerId") Long sellerId,
+              @Param("categoryId") Long categoryId,
+              @Param("brandId") Integer brandId,
+              @Param("price") BigDecimal price,
+              @Param("customerId") Long customerId);
 }

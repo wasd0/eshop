@@ -1,5 +1,6 @@
 package com.wasd.ordermicroservice.service.brand;
 
+import com.wasd.ordermicroservice.data.brand.BrandRequest;
 import com.wasd.ordermicroservice.data.brand.BrandResponse;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.persistence.brand.Brand;
@@ -41,7 +42,7 @@ class BrandServiceImplTest {
     void create_withCorrectRequestData_savesAndReturnsResponse() {
         String title = "test";
         String description = "test2";
-        brandService.create(title, description);
+        brandService.create(new BrandRequest(title, description));
         verify(brandRepository, times(1)).save(any());
     }
 }
