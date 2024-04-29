@@ -4,6 +4,7 @@ import com.wasd.ordermicroservice.data.brand.BrandRequest;
 import com.wasd.ordermicroservice.data.brand.BrandResponse;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.service.brand.BrandService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public BrandResponse create(@RequestBody BrandRequest request) {
+    public BrandResponse create(@Valid @RequestBody BrandRequest request) {
         return brandService.create(request);
     }
 }

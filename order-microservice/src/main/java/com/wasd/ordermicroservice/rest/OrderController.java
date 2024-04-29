@@ -5,6 +5,8 @@ import com.wasd.ordermicroservice.data.order.OrderResponse;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.exception.OrderCreationException;
 import com.wasd.ordermicroservice.service.order.OrderService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +24,12 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public OrderResponse findById(@PathVariable Long id) throws NotFoundException {
+    public OrderResponse findById(@Min(0L) @PathVariable Long id) throws NotFoundException {
         return orderService.findById(id);
     }
 
     @PostMapping
-    public void create(@RequestBody OrderRequest request) throws OrderCreationException {
+    public void create(@Valid @RequestBody OrderRequest request) throws OrderCreationException {
         orderService.create(request);
     }
 }
