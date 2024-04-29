@@ -50,7 +50,7 @@ class SellerServiceImplTest {
     }
 
     @Test
-    void create_whenSellerByTinAlreadyExists_throwsAlreadyExistsException() throws AlreadyExistsException {
+    void create_whenSellerByTinAlreadyExists_throwsAlreadyExistsException() {
         String title = "test";
         String description = "test2";
         Integer tin = 1;
