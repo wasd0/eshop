@@ -2,9 +2,9 @@ package com.wasd.ordermicroservice.service.seller;
 
 import com.wasd.ordermicroservice.data.seller.SellerRequest;
 import com.wasd.ordermicroservice.data.seller.SellerResponse;
-import com.wasd.ordermicroservice.exception.AlreadyExistsException;
-import com.wasd.ordermicroservice.exception.NotFoundException;
-import com.wasd.ordermicroservice.exception.SellerCreationException;
+import com.wasd.ordermicroservice.exception.common.AlreadyExistsException;
+import com.wasd.ordermicroservice.exception.common.NotFoundException;
+import com.wasd.ordermicroservice.exception.persistence.SellerCreationException;
 import com.wasd.ordermicroservice.persistence.seller.Seller;
 import com.wasd.ordermicroservice.persistence.seller.SellerRepository;
 import org.junit.jupiter.api.Assertions;

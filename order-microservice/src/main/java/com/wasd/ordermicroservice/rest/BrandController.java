@@ -2,7 +2,7 @@ package com.wasd.ordermicroservice.rest;
 
 import com.wasd.ordermicroservice.data.brand.BrandRequest;
 import com.wasd.ordermicroservice.data.brand.BrandResponse;
-import com.wasd.ordermicroservice.exception.NotFoundException;
+import com.wasd.ordermicroservice.exception.common.NotFoundException;
 import com.wasd.ordermicroservice.service.brand.BrandService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;

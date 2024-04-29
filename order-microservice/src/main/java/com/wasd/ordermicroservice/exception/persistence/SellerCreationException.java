@@ -1,4 +1,4 @@
-package com.wasd.ordermicroservice.exception;
+package com.wasd.ordermicroservice.exception.persistence;
 
 public class SellerCreationException extends RuntimeException {
     public SellerCreationException(String message) {

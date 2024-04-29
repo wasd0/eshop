@@ -1,4 +1,4 @@
-package com.wasd.ordermicroservice.exception;
+package com.wasd.ordermicroservice.exception.persistence;
 
 public class OrderCreationException extends RuntimeException {
     public OrderCreationException() {

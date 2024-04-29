@@ -2,8 +2,8 @@ package com.wasd.ordermicroservice.rest;
 
 import com.wasd.ordermicroservice.data.order.OrderRequest;
 import com.wasd.ordermicroservice.data.order.OrderResponse;
-import com.wasd.ordermicroservice.exception.NotFoundException;
-import com.wasd.ordermicroservice.exception.OrderCreationException;
+import com.wasd.ordermicroservice.exception.common.NotFoundException;
+import com.wasd.ordermicroservice.exception.persistence.OrderCreationException;
 import com.wasd.ordermicroservice.service.order.OrderService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;

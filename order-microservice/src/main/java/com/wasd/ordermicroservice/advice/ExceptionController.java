@@ -1,10 +1,10 @@
 package com.wasd.ordermicroservice.advice;
 
 import com.wasd.ordermicroservice.data.exception.HttpExceptionResponse;
-import com.wasd.ordermicroservice.exception.AlreadyExistsException;
-import com.wasd.ordermicroservice.exception.NotFoundException;
-import com.wasd.ordermicroservice.exception.OrderCreationException;
-import com.wasd.ordermicroservice.exception.SellerCreationException;
+import com.wasd.ordermicroservice.exception.common.AlreadyExistsException;
+import com.wasd.ordermicroservice.exception.common.NotFoundException;
+import com.wasd.ordermicroservice.exception.persistence.OrderCreationException;
+import com.wasd.ordermicroservice.exception.persistence.SellerCreationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

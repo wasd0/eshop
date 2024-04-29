@@ -2,7 +2,7 @@ package com.wasd.ordermicroservice.service.brand;
 
 import com.wasd.ordermicroservice.data.brand.BrandRequest;
 import com.wasd.ordermicroservice.data.brand.BrandResponse;
-import com.wasd.ordermicroservice.exception.NotFoundException;
+import com.wasd.ordermicroservice.exception.common.NotFoundException;
 import com.wasd.ordermicroservice.persistence.brand.Brand;
 import com.wasd.ordermicroservice.persistence.brand.BrandRepository;
 import com.wasd.ordermicroservice.util.mapper.BrandMapper;

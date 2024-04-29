@@ -1,4 +1,4 @@
-package com.wasd.ordermicroservice.exception;
+package com.wasd.ordermicroservice.exception.common;
 
 public class AlreadyExistsException extends Exception {
     public AlreadyExistsException(Class<?> target) {
