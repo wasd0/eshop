@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name = "sellers")
 public class Seller {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "title", nullable = false)
     private String title;
