@@ -4,6 +4,7 @@ import com.wasd.ordermicroservice.data.seller.SellerRequest;
 import com.wasd.ordermicroservice.data.seller.SellerResponse;
 import com.wasd.ordermicroservice.exception.AlreadyExistsException;
 import com.wasd.ordermicroservice.exception.NotFoundException;
+import com.wasd.ordermicroservice.exception.SellerCreationException;
 import com.wasd.ordermicroservice.persistence.seller.Seller;
 import com.wasd.ordermicroservice.persistence.seller.SellerRepository;
 import org.junit.jupiter.api.Assertions;
@@ -57,6 +58,30 @@ class SellerServiceImplTest {
 
         when(sellerRepository.existsByTin(tin)).thenReturn(true);
         Assertions.assertThrows(AlreadyExistsException.class,
+                () -> sellerService.create(new SellerRequest(title, description, tin)));
+
+        verify(sellerRepository, times(0)).save(any());
+    }
+
+    @Test
+    void create_whenTinLessThanZero_throwsSellerCreationException() {
+        String title = "test";
+        String description = "test2";
+        Integer tin = -1;
+
+        Assertions.assertThrows(SellerCreationException.class,
+                () -> sellerService.create(new SellerRequest(title, description, tin)));
+
+        verify(sellerRepository, times(0)).save(any());
+    }
+    
+    @Test
+    void create_whenTinIsNull_throwsSellerCreationException() {
+        String title = "test";
+        String description = "test2";
+        Integer tin = null;
+
+        Assertions.assertThrows(SellerCreationException.class,
                 () -> sellerService.create(new SellerRequest(title, description, tin)));
 
         verify(sellerRepository, times(0)).save(any());
