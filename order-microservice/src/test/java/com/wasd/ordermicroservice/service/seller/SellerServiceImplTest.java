@@ -2,6 +2,7 @@ package com.wasd.ordermicroservice.service.seller;
 
 import com.wasd.ordermicroservice.data.seller.SellerRequest;
 import com.wasd.ordermicroservice.data.seller.SellerResponse;
+import com.wasd.ordermicroservice.exception.AlreadyExistsException;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.persistence.seller.Seller;
 import com.wasd.ordermicroservice.persistence.seller.SellerRepository;
@@ -41,10 +42,23 @@ class SellerServiceImplTest {
     }
 
     @Test
-    void create_withCorrectRequestData_savesAndReturnsResponse() {
+    void create_withCorrectRequestData_savesAndReturnsResponse() throws AlreadyExistsException {
         String title = "test";
         String description = "test2";
         sellerService.create(new SellerRequest(title, description, 1));
         verify(sellerRepository, times(1)).save(any());
+    }
+
+    @Test
+    void create_whenSellerByTinAlreadyExists_throwsAlreadyExistsException() throws AlreadyExistsException {
+        String title = "test";
+        String description = "test2";
+        Integer tin = 1;
+
+        when(sellerRepository.existsByTin(tin)).thenReturn(true);
+        Assertions.assertThrows(AlreadyExistsException.class,
+                () -> sellerService.create(new SellerRequest(title, description, tin)));
+
+        verify(sellerRepository, times(0)).save(any());
     }
 }
