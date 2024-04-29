@@ -2,6 +2,7 @@ package com.wasd.ordermicroservice.rest;
 
 import com.wasd.ordermicroservice.data.seller.SellerRequest;
 import com.wasd.ordermicroservice.data.seller.SellerResponse;
+import com.wasd.ordermicroservice.exception.AlreadyExistsException;
 import com.wasd.ordermicroservice.exception.NotFoundException;
 import com.wasd.ordermicroservice.service.seller.SellerService;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ public class SellerController {
     }
 
     @PostMapping
-    public SellerResponse create(@Valid @RequestBody SellerRequest request) {
+    public SellerResponse create(@Valid @RequestBody SellerRequest request) throws AlreadyExistsException {
         return sellerService.create(request);
     }
 }

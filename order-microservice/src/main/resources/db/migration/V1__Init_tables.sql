@@ -18,7 +18,8 @@ create table if not exists sellers
     id          bigserial    not null primary key,
     title       varchar(255) not null,
     description varchar(300),
-    TIN         int          not null unique
+    TIN         int          not null unique,
+    constraint check_tin_min check ( TIN > 0 )
 );
 
 create table if not exists order_details
