@@ -1,4 +1,4 @@
-package com.wasd.usermicroservice.persistence.model;
+package com.wasd.usermicroservice.persistence.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

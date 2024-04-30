@@ -1,6 +1,4 @@
-package com.wasd.usermicroservice.persistence.repository;
-
-import com.wasd.usermicroservice.persistence.model.User;
+package com.wasd.usermicroservice.persistence.user;
 
 import java.util.List;
 import java.util.Optional;
