@@ -14,9 +14,6 @@
     <name>order-microservice</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <spring-boot.version>3.2.2</spring-boot.version>
         <flyway.version>10.4.1</flyway.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <docker.image.prefix>eshop</docker.image.prefix>
@@ -126,6 +123,21 @@
         </dependency>
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>6.1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>6.1.6</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
