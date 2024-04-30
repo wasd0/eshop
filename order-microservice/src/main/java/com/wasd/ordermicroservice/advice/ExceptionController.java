@@ -3,6 +3,7 @@ package com.wasd.ordermicroservice.advice;
 import com.wasd.ordermicroservice.data.exception.HttpExceptionResponse;
 import com.wasd.ordermicroservice.exception.common.AlreadyExistsException;
 import com.wasd.ordermicroservice.exception.common.NotFoundException;
+import com.wasd.ordermicroservice.exception.persistence.CategoryCreationException;
 import com.wasd.ordermicroservice.exception.persistence.OrderCreationException;
 import com.wasd.ordermicroservice.exception.persistence.SellerCreationException;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,10 @@ public class ExceptionController {
         return new HttpExceptionResponse(HttpStatus.NOT_FOUND, exception.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler({OrderCreationException.class, AlreadyExistsException.class, SellerCreationException.class})
+    @ExceptionHandler({OrderCreationException.class,
+            AlreadyExistsException.class,
+            SellerCreationException.class,
+            CategoryCreationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public HttpExceptionResponse orderCreation(Exception exception) {
         return new HttpExceptionResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), LocalDateTime.now());
