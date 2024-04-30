@@ -22,7 +22,7 @@ public class ProductCategory {
     private String title;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @OrderBy
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "parent_category_id")
     private ProductCategory parent = null;
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<ProductCategory> children = new HashSet<>();
