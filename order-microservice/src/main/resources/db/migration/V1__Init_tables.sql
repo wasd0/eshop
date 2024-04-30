@@ -8,7 +8,7 @@ create table if not exists brands
 create table if not exists categories
 (
     id                 bigserial    not null primary key,
-    title              varchar(100) not null,
+    title              varchar(100) not null unique,
     parent_category_id bigint,
     constraint parent_category_id_fk foreign key (parent_category_id) references categories (id)
 );

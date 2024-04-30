@@ -16,8 +16,9 @@ import java.util.Set;
 @Table(name = "categories")
 public class ProductCategory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title", nullable = false, length = 100)
+    @Column(name = "title", nullable = false, length = 100, unique = true)
     private String title;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @OrderBy
