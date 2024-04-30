@@ -1,0 +1,23 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://productdb:5432/postgres
+  flyway:
+    url: jdbc:postgresql://productdb:5432/postgres
+    user: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+  data:
+    redis:
+      host: product-cache
+      port: 6379
+      password: 123
