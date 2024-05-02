@@ -8,12 +8,12 @@
 sequenceDiagram
     actor customer
     participant order_s as order <br> microservice
-    participant customer_s as customer <br> microservice
     participant product_s as product <br> microservice
-    customer ->> order_s: order request created
-    order_s ->> customer_s: order created pending
+    participant customer_s as customer <br> microservice
+    customer ->> order_s: /post orders
+    order_s ->> product_s: order created pending
+    product_s -->> order_s: product(s) are reserved
+    order_s ->> customer_s: order products are reserved
     customer_s -->> order_s: money reserved
-    order_s ->> product_s: order has been paid
-    product_s -->> order_s: product(s) reserved
     order_s -->> customer: order approved
 ```
