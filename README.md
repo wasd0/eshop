@@ -12,8 +12,7 @@ sequenceDiagram
     participant customer_s as customer <br> microservice
     customer ->> order_s: /post orders
     order_s ->> product_s: order created pending
-    product_s -->> order_s: product(s) are reserved
-    order_s ->> customer_s: order products are reserved
+    product_s -->> customer_s: product(s) are reserved
     customer_s -->> order_s: money reserved
     order_s -->> customer: order approved
 ```
