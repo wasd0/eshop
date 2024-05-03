@@ -47,4 +47,5 @@ create table if not exists products_history
 
 create index if not exists product_brands_index on products (brand_id);
 create index if not exists product_categories_index on products (category_id);
+create index if not exists product_sellers_index on products (seller_id);
 create index if not exists history_products_index on products_history (product_id);
