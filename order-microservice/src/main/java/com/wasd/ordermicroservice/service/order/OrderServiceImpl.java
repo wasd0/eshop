@@ -31,13 +31,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void create(OrderRequest request) throws OrderCreationException {
+    public OrderResponse create(OrderRequest request) throws OrderCreationException {
         try {
-            orderRepository.save(request.sellerId(),
-                    request.categoryId(),
-                    request.brandId(),
-                    request.price(),
-                    request.customerId());
+            Order order = OrderMapper.INSTANCE.requestToOrder(request);
+            orderRepository.save(order);
+            return OrderMapper.INSTANCE.orderToResponse(order);
         } catch (RuntimeException e) {
             throw new OrderCreationException();
         }

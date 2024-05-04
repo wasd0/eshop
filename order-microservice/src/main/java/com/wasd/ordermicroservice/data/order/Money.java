@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Money {
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
 
     public boolean isGreaterOrEqualsThan(Money other) {
         return amount.compareTo(other.amount) >= 0;

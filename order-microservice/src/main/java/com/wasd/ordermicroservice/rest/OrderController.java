@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public void create(@Valid @RequestBody OrderRequest request) throws OrderCreationException {
-        orderService.create(request);
+    public OrderResponse create(@Valid @RequestBody OrderRequest request) throws OrderCreationException {
+        return orderService.create(request);
     }
 }

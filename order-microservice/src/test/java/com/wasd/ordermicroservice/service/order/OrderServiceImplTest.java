@@ -1,5 +1,6 @@
 package com.wasd.ordermicroservice.service.order;
 
+import com.wasd.ordermicroservice.data.order.Money;
 import com.wasd.ordermicroservice.data.order.OrderRequest;
 import com.wasd.ordermicroservice.data.order.OrderResponse;
 import com.wasd.ordermicroservice.exception.common.NotFoundException;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,15 +62,20 @@ class OrderServiceImplTest {
 
     @Test
     void create_withCorrectRequestData_savesAndReturnsResponse() {
-        OrderRequest request = new OrderRequest(0L, 0L, 0, BigDecimal.TEN, 0L);
+        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L);
         Assertions.assertDoesNotThrow(() -> orderService.create(request));
-        verify(orderRepository, times(1)).save(0L, 0L, 0, BigDecimal.TEN, 0L);
+        verify(orderRepository, times(1)).save(any());
     }
 
     @Test
     void create_withIncorrectRequestData_throwsOrderCreationException() {
-        OrderRequest request = new OrderRequest(0L, 0L, 0, BigDecimal.TEN, 0L);
-        willThrow(RuntimeException.class).given(orderRepository).save(0L, 0L, 0, BigDecimal.TEN, 0L);
+        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L);
+        Order order = new Order();
+        order.setPrice(new Money(BigDecimal.ZERO));
+        order.setCustomerId(0L);
+
+        when(orderRepository.save(order)).thenThrow(RuntimeException.class);
         Assertions.assertThrows(OrderCreationException.class, () -> orderService.create(request));
+        Assertions.assertNull(order.getId());
     }
 }
