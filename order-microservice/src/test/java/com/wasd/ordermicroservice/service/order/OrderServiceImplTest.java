@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
@@ -27,6 +28,8 @@ class OrderServiceImplTest {
     OrderServiceImpl orderService;
     @Mock
     OrderRepository orderRepository;
+    @Mock
+    OrderHistoryService orderHistoryService;
 
     @Test
     void findAll_whenOrdersExists_returnsOrderResponseList() {
@@ -62,14 +65,15 @@ class OrderServiceImplTest {
 
     @Test
     void create_withCorrectRequestData_savesAndReturnsResponse() {
-        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L);
+        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L, Set.of(1L, 2L, 3L));
         Assertions.assertDoesNotThrow(() -> orderService.create(request));
         verify(orderRepository, times(1)).save(any());
+        verify(orderHistoryService, times(1)).append(any());
     }
 
     @Test
     void create_withIncorrectRequestData_throwsOrderCreationException() {
-        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L);
+        OrderRequest request = new OrderRequest(BigDecimal.ZERO, 0L, Set.of(1L, 2L, 3L));
         Order order = new Order();
         order.setPrice(new Money(BigDecimal.ZERO));
         order.setCustomerId(0L);

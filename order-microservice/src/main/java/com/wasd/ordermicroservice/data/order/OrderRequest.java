@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 public record OrderRequest(
         @NotNull
@@ -14,6 +14,6 @@ public record OrderRequest(
         @Min(0L)
         Long customerId,
         @NotNull
-        List<Long> products
+        Set<Long> products
 ) {
 }

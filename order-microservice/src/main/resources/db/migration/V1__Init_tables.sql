@@ -7,11 +7,12 @@ create table if not exists orders
     state       varchar(50) not null default 'PENDING'
 );
 
-create table if not exists orders_products
+create table if not exists orders_history
 (
-    order_id   bigint not null,
-    product_id bigint not null,
-    primary key (order_id, product_id),
-    constraint order_id_fk foreign key (order_id) references orders (id),
-    constraint product_id_check check ( product_id > 0 )
+    id             bigserial    not null primary key,
+    order_id       bigint       not null,
+    products       bigint[]     not null,
+    description    varchar(300) not null,
+    operation_time timestamp    not null default now(),
+    constraint order_id_fk foreign key (order_id) references orders (id)
 );
