@@ -1,5 +1,6 @@
 package com.wasd.productmicroservice.persistence.category;
 
+import com.wasd.productmicroservice.persistence.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString(exclude = {"parent", "children", "orders"})
+@ToString(exclude = {"parent", "children", "products"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -26,25 +27,25 @@ public class ProductCategory {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<ProductCategory> children = new HashSet<>();
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetails> orders = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
-    public void addCategory(ProductCategory category) {
-        children.add(category);
-        category.setParent(this);
+    public void addChildCategory(ProductCategory child) {
+        children.add(child);
+        child.setParent(this);
     }
 
-    public void removeCategory(ProductCategory category) {
-        children.remove(category);
-        category.setParent(null);
+    public void removeChildCategory(ProductCategory child) {
+        children.remove(child);
+        child.setParent(null);
     }
 
-    public void addOrderDetails(OrderDetails order) {
-        orders.add(order);
-        order.setCategory(this);
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setCategory(this);
     }
 
-    public void removeOrderDetails(OrderDetails order) {
-        orders.remove(order);
-        order.setCategory(null);
+    public void removeProduct(Product product) {
+        products.remove(product);
+        product.setCategory(null);
     }
 }

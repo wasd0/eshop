@@ -1,5 +1,6 @@
 package com.wasd.productmicroservice.persistence.brand;
 
+import com.wasd.productmicroservice.persistence.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,8 +9,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString(exclude = {"orders"})
-@EqualsAndHashCode(exclude = {"orders"})
+@ToString(exclude = {"products"})
+@EqualsAndHashCode(exclude = {"products"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -23,15 +24,15 @@ public class Brand {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetails> orders = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
-    public void addOrder(OrderDetails order) {
-        orders.add(order);
-        order.setBrand(this);
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setBrand(this);
     }
 
-    public void removeOrder(OrderDetails order) {
-        orders.remove(order);
-        order.setBrand(null);
+    public void removeProduct(Product product) {
+        products.remove(product);
+        product.setBrand(null);
     }
 }

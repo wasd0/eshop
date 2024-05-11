@@ -1,5 +1,6 @@
 package com.wasd.productmicroservice.persistence.seller;
 
+import com.wasd.productmicroservice.persistence.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,8 +9,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString(exclude = {"orders"})
-@EqualsAndHashCode(exclude = {"orders"})
+@ToString(exclude = {"products"})
+@EqualsAndHashCode(exclude = {"products"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,15 +26,15 @@ public class Seller {
     @Column(name = "TIN", nullable = false, unique = true)
     private Integer tin;
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetails> orders = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
-    public void addOrderDetails(OrderDetails order) {
-        orders.add(order);
-        order.setSeller(this);
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setSeller(this);
     }
 
-    public void removeOrderDetails(OrderDetails order) {
-        orders.remove(order);
-        order.setSeller(null);
+    public void removeProduct(Product product) {
+        products.remove(product);
+        product.setSeller(null);
     }
 }
