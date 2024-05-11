@@ -6,12 +6,15 @@ import com.wasd.productmicroservice.persistence.seller.Seller;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"seller", "category", "brand"})
-@ToString(exclude = {"seller", "category", "brand"})
+@EqualsAndHashCode(exclude = {"seller", "category", "brand", "operations"})
+@ToString(exclude = {"seller", "category", "brand", "operations"})
 @Table(name = "products")
 public class Product {
     @Id
@@ -26,4 +29,6 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<WarehouseOperation> operations = new HashSet<>();
 }

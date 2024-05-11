@@ -35,7 +35,7 @@ create table if not exists products
     constraint seller_id_fk foreign key (seller_id) references sellers (id)
 );
 
-create table if not exists products_history
+create table if not exists warehouse_operations
 (
     id             bigserial    not null primary key,
     product_id     bigint       not null,
@@ -48,4 +48,4 @@ create table if not exists products_history
 create index if not exists product_brands_index on products (brand_id);
 create index if not exists product_categories_index on products (category_id);
 create index if not exists product_sellers_index on products (seller_id);
-create index if not exists history_products_index on products_history (product_id);
+create index if not exists history_products_index on warehouse_operations (product_id);
