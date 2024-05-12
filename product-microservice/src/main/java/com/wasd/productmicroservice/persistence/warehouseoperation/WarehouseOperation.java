@@ -1,5 +1,6 @@
-package com.wasd.productmicroservice.persistence.product;
+package com.wasd.productmicroservice.persistence.warehouseoperation;
 
+import com.wasd.productmicroservice.persistence.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

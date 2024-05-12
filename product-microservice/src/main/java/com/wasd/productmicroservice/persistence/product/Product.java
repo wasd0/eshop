@@ -3,6 +3,7 @@ package com.wasd.productmicroservice.persistence.product;
 import com.wasd.productmicroservice.persistence.brand.Brand;
 import com.wasd.productmicroservice.persistence.category.ProductCategory;
 import com.wasd.productmicroservice.persistence.seller.Seller;
+import com.wasd.productmicroservice.persistence.warehouseoperation.WarehouseOperation;
 import jakarta.persistence.*;
 import lombok.*;
 
