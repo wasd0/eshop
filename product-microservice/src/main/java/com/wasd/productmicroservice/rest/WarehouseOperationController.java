@@ -4,26 +4,23 @@ import com.wasd.productmicroservice.data.warehouseoperation.WarehouseOperationRe
 import com.wasd.productmicroservice.data.warehouseoperation.WarehouseOperationResponse;
 import com.wasd.productmicroservice.service.warehouseoperation.WarehouseOperationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/warehouseoperation")
+@RequestMapping("api/v1/warehouseoperations")
 public class WarehouseOperationController {
     private final WarehouseOperationService warehouseOperationService;
-    
-    @GetMapping
-    public List<WarehouseOperationResponse> findAllByProductId(Long productId) {
+
+    @GetMapping("{productId}")
+    public List<WarehouseOperationResponse> findAllByProductId(@PathVariable Long productId) {
         return warehouseOperationService.findAllByProductId(productId);
     }
-    
+
     @PostMapping
-    public WarehouseOperationResponse create(WarehouseOperationRequest request) {
+    public WarehouseOperationResponse create(@RequestBody WarehouseOperationRequest request) {
         return warehouseOperationService.create(request);
     }
 }

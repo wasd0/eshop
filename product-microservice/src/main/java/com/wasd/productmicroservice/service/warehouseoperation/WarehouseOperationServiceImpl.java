@@ -8,7 +8,6 @@ import com.wasd.productmicroservice.persistence.product.ProductRepository;
 import com.wasd.productmicroservice.persistence.warehouseoperation.WarehouseOperation;
 import com.wasd.productmicroservice.persistence.warehouseoperation.WarehouseOperationRepository;
 import com.wasd.productmicroservice.util.mapper.WarehouseOperationMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,18 +33,19 @@ public class WarehouseOperationServiceImpl implements WarehouseOperationService 
         Product product;
         try {
             product = productRepository.getReferenceById(request.productId());
-        } catch (EntityNotFoundException e) {
+
+            WarehouseOperation warehouseOperation = WarehouseOperationMapper.INSTANCE
+                .requestToWarehouseOperation(request);
+
+            warehouseOperation.setOperationTime(Instant.now());
+            warehouseOperation.setProduct(product);
+            warehouseOperationRepository.save(warehouseOperation);
+
+            return WarehouseOperationMapper.INSTANCE.warehouseOperationToResponse(warehouseOperation);
+        } catch (RuntimeException e) {
             throw new WarehouseOperationCreationException(
-                String.format("Can't find product with id '%s'", request.productId()));
+                String.format("Incorrect product with id '%s'", request.productId()));
         }
 
-        WarehouseOperation warehouseOperation = WarehouseOperationMapper.INSTANCE
-            .requestToWarehouseOperation(request);
-
-        warehouseOperation.setOperationTime(Instant.now());
-        warehouseOperation.setProduct(product);
-        warehouseOperationRepository.save(warehouseOperation);
-
-        return WarehouseOperationMapper.INSTANCE.warehouseOperationToResponse(warehouseOperation);
     }
 }

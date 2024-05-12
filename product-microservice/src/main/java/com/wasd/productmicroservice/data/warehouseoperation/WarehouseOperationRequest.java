@@ -8,7 +8,7 @@ public record WarehouseOperationRequest(
     @NotNull
     Long productId,
     @NotNull
-    int quantity,
+    Integer quantity,
     @NotNull
     @NotBlank
     @Length(max = 300)
