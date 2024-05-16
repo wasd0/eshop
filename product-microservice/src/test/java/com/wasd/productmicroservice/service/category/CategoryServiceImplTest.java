@@ -1,4 +1,4 @@
-package com.wasd.productmicroservice.category;
+package com.wasd.productmicroservice.service.category;
 
 import com.wasd.productmicroservice.data.category.CategoryRequest;
 import com.wasd.productmicroservice.data.category.CategoryResponse;
@@ -6,7 +6,6 @@ import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.exception.persistence.CategoryCreationException;
 import com.wasd.productmicroservice.persistence.category.CategoryRepository;
 import com.wasd.productmicroservice.persistence.category.ProductCategory;
-import com.wasd.productmicroservice.service.category.CategoryServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

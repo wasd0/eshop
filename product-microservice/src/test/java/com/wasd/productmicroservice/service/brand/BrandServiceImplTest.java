@@ -1,11 +1,10 @@
-package com.wasd.productmicroservice.brand;
+package com.wasd.productmicroservice.service.brand;
 
 import com.wasd.productmicroservice.data.brand.BrandRequest;
 import com.wasd.productmicroservice.data.brand.BrandResponse;
 import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.persistence.brand.Brand;
 import com.wasd.productmicroservice.persistence.brand.BrandRepository;
-import com.wasd.productmicroservice.service.brand.BrandServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

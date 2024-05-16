@@ -1,4 +1,4 @@
-package com.wasd.productmicroservice.seller;
+package com.wasd.productmicroservice.service.seller;
 
 import com.wasd.productmicroservice.data.seller.SellerRequest;
 import com.wasd.productmicroservice.data.seller.SellerResponse;
@@ -7,7 +7,6 @@ import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.exception.persistence.SellerCreationException;
 import com.wasd.productmicroservice.persistence.seller.Seller;
 import com.wasd.productmicroservice.persistence.seller.SellerRepository;
-import com.wasd.productmicroservice.service.seller.SellerServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
