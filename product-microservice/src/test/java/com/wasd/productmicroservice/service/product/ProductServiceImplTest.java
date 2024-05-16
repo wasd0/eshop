@@ -1,10 +1,11 @@
 package com.wasd.productmicroservice.service.product;
 
-import com.wasd.productmicroservice.data.product.ProductRequest;
+import com.wasd.productmicroservice.data.product.ProductCreateRequest;
 import com.wasd.productmicroservice.data.product.ProductResponse;
 import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.persistence.product.Product;
 import com.wasd.productmicroservice.persistence.product.ProductRepository;
+import com.wasd.productmicroservice.service.warehouseoperation.WarehouseOperationServiceImpl;
 import com.wasd.productmicroservice.util.mapper.ProductMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,8 @@ class ProductServiceImplTest {
     ProductServiceImpl productService;
     @Mock
     ProductRepository productRepository;
+    @Mock
+    WarehouseOperationServiceImpl warehouseOperationService;
     @Spy
     ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
@@ -46,8 +49,9 @@ class ProductServiceImplTest {
 
     @Test
     void create_withCorrectRequestData_savesAndReturnsResponse() {
-        ProductResponse response = productService.create(new ProductRequest("", "", 1L, 1L, 1));
+        ProductResponse response = productService.create(new ProductCreateRequest("", "", 15, 1L, 1L, 1));
         verify(productRepository, times(1)).save(any());
+        verify(warehouseOperationService, times(1)).create(any());
         Assertions.assertNotNull(response);
     }
 }
