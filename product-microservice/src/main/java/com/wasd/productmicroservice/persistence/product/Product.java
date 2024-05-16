@@ -23,7 +23,7 @@ public class Product {
     private Long id;
     @Column(name = "title", length = 100, nullable = false)
     private String title;
-    @Column(name = "title", nullable = false, columnDefinition = "text")
+    @Column(name = "description", nullable = false, columnDefinition = "text")
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
