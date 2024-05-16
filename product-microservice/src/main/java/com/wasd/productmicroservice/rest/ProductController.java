@@ -1,6 +1,6 @@
 package com.wasd.productmicroservice.rest;
 
-import com.wasd.productmicroservice.data.product.ProductRequest;
+import com.wasd.productmicroservice.data.product.ProductCreateRequest;
 import com.wasd.productmicroservice.data.product.ProductResponse;
 import com.wasd.productmicroservice.exception.common.AlreadyExistsException;
 import com.wasd.productmicroservice.exception.common.NotFoundException;
@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductResponse create(@Valid @RequestBody ProductRequest request) throws AlreadyExistsException {
+    public ProductResponse create(@Valid @RequestBody ProductCreateRequest request) throws AlreadyExistsException {
         return productService.create(request);
     }
 }

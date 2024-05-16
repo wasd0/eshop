@@ -1,6 +1,6 @@
 package com.wasd.productmicroservice.util.mapper;
 
-import com.wasd.productmicroservice.data.product.ProductRequest;
+import com.wasd.productmicroservice.data.product.ProductCreateRequest;
 import com.wasd.productmicroservice.data.product.ProductResponse;
 import com.wasd.productmicroservice.persistence.product.Product;
 import org.mapstruct.Mapper;
@@ -17,5 +17,5 @@ public interface ProductMapper {
     @Mapping(target = "seller.id", source = "sellerId")
     @Mapping(target = "category.id", source = "categoryId")
     @Mapping(target = "brand.id", source = "brandId")
-    Product requestToProduct(ProductRequest request);
+    Product requestToProduct(ProductCreateRequest request);
 }
