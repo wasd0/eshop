@@ -46,8 +46,9 @@ class SellerServiceImplTest {
     void create_withCorrectRequestData_savesAndReturnsResponse() throws AlreadyExistsException {
         String title = "test";
         String description = "test2";
-        sellerService.create(new SellerRequest(title, description, 1));
+        SellerResponse response = sellerService.create(new SellerRequest(title, description, 1));
         verify(sellerRepository, times(1)).save(any());
+        Assertions.assertNotNull(response);
     }
 
     @Test

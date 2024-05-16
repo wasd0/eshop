@@ -42,7 +42,8 @@ class BrandServiceImplTest {
     void create_withCorrectRequestData_savesAndReturnsResponse() {
         String title = "test";
         String description = "test2";
-        brandService.create(new BrandRequest(title, description));
+        BrandResponse response = brandService.create(new BrandRequest(title, description));
         verify(brandRepository, times(1)).save(any());
+        Assertions.assertNotNull(response);
     }
 }

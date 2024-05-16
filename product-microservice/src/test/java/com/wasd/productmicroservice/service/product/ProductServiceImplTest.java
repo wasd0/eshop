@@ -5,11 +5,14 @@ import com.wasd.productmicroservice.data.product.ProductResponse;
 import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.persistence.product.Product;
 import com.wasd.productmicroservice.persistence.product.ProductRepository;
+import com.wasd.productmicroservice.util.mapper.ProductMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -23,6 +26,8 @@ class ProductServiceImplTest {
     ProductServiceImpl productService;
     @Mock
     ProductRepository productRepository;
+    @Spy
+    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     @Test
     void findById_whenIncorrectId_ThrowsNotFoundException() {
@@ -41,7 +46,8 @@ class ProductServiceImplTest {
 
     @Test
     void create_withCorrectRequestData_savesAndReturnsResponse() {
-        productService.create(new ProductRequest(1L, 1L, 1));
+        ProductResponse response = productService.create(new ProductRequest(1L, 1L, 1));
         verify(productRepository, times(1)).save(any());
+        Assertions.assertNotNull(response);
     }
 }
