@@ -46,7 +46,7 @@ class ProductServiceImplTest {
 
     @Test
     void create_withCorrectRequestData_savesAndReturnsResponse() {
-        ProductResponse response = productService.create(new ProductRequest(1L, 1L, 1));
+        ProductResponse response = productService.create(new ProductRequest("", "", 1L, 1L, 1));
         verify(productRepository, times(1)).save(any());
         Assertions.assertNotNull(response);
     }
