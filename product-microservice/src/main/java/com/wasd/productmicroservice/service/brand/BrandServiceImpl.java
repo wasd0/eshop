@@ -18,9 +18,7 @@ public class BrandServiceImpl implements BrandService {
     @Transactional
     @Override
     public BrandResponse create(BrandRequest request) {
-        Brand brand = new Brand();
-        brand.setTitle(request.title());
-        brand.setDescription(request.description());
+        Brand brand = BrandMapper.INSTANCE.requestToBrand(request);
         brandRepository.save(brand);
         return BrandMapper.INSTANCE.brandToResponse(brand);
     }
