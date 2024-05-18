@@ -1,8 +1,11 @@
 package com.wasd.ordermicroservice.persistence.order;
 
 import com.wasd.ordermicroservice.data.order.Money;
+import com.wasd.ordermicroservice.data.order.OrderState;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
@@ -12,20 +15,18 @@ import java.time.Instant;
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-@ToString(exclude = {"details"})
-@EqualsAndHashCode(exclude = {"details"})
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Embedded
     @AttributeOverride(name = "amount", column = @Column(name = "price", nullable = false))
-    private Money price;
+    private Money price = new Money();
     @CreationTimestamp
-    private Instant createdOn;
+    private Instant createdOn = Instant.now();
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false, unique = true)
-    @MapsId
-    private OrderDetails details;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state", length = 50, nullable = false)
+    private OrderState state = OrderState.PENDING;
 }

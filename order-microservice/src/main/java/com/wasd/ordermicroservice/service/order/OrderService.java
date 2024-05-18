@@ -7,10 +7,11 @@ import com.wasd.ordermicroservice.exception.persistence.OrderCreationException;
 
 import java.util.List;
 
-public interface OrderService {
+public interface 
+OrderService {
     List<OrderResponse> findAll();
 
     OrderResponse findById(Long id) throws NotFoundException;
 
-    void create(OrderRequest request) throws OrderCreationException;
+    OrderResponse create(OrderRequest request) throws OrderCreationException;
 }

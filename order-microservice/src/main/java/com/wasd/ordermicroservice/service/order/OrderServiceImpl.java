@@ -1,5 +1,6 @@
 package com.wasd.ordermicroservice.service.order;
 
+import com.wasd.ordermicroservice.data.order.OrderHistoryRequest;
 import com.wasd.ordermicroservice.data.order.OrderRequest;
 import com.wasd.ordermicroservice.data.order.OrderResponse;
 import com.wasd.ordermicroservice.exception.common.NotFoundException;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final OrderHistoryService orderHistoryService;
 
     @Override
     public List<OrderResponse> findAll() {
@@ -31,13 +33,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void create(OrderRequest request) throws OrderCreationException {
+    public OrderResponse create(OrderRequest request) throws OrderCreationException {
         try {
-            orderRepository.save(request.sellerId(),
-                    request.categoryId(),
-                    request.brandId(),
-                    request.price(),
-                    request.customerId());
+            Order order = OrderMapper.INSTANCE.requestToOrder(request);
+            orderRepository.save(order);
+
+            OrderHistoryRequest appendOperationRequest = new OrderHistoryRequest(
+                    order.getId(), request.products(), "New order");
+
+            orderHistoryService.append(appendOperationRequest);
+            return OrderMapper.INSTANCE.orderToResponse(order);
         } catch (RuntimeException e) {
             throw new OrderCreationException();
         }

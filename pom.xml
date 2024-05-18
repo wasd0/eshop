@@ -7,19 +7,21 @@
         <version>3.2.2</version>
         <relativePath/>
     </parent>
-    
+
     <modules>
         <module>user-microservice</module>
         <module>config-server</module>
         <module>order-microservice</module>
+        <module>product-microservice</module>
     </modules>
-    
+
     <groupId>com.wasd</groupId>
     <artifactId>eshop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.version>3.2.2</spring-boot.version>
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -27,7 +29,7 @@
         <docker.image.prefix>eshop</docker.image.prefix>
 
     </properties>
-    
+
     <build>
         <plugins>
             <plugin>
