@@ -10,4 +10,5 @@ public interface WarehouseOperationService {
     List<WarehouseOperationResponse> findAllByProductId(Long productId);
 
         WarehouseOperationResponse create(WarehouseOperationRequest request) throws WarehouseOperationCreationException;
+		Integer getTotalQuantityByProductId(Long productId);
 }

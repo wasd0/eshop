@@ -18,34 +18,40 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class WarehouseOperationServiceImpl implements WarehouseOperationService {
-    private final WarehouseOperationRepository warehouseOperationRepository;
-    private final ProductRepository productRepository;
+	private final WarehouseOperationRepository warehouseOperationRepository;
+	private final ProductRepository            productRepository;
 
-    @Override
-    public List<WarehouseOperationResponse> findAllByProductId(Long productId) {
-        return warehouseOperationRepository.findAllByProductId(productId).stream()
-            .map(WarehouseOperationMapper.INSTANCE::warehouseOperationToResponse).toList();
-    }
+	@Override
+	public List<WarehouseOperationResponse> findAllByProductId(Long productId) {
+		return warehouseOperationRepository.findAllByProductId(productId).stream().map(
+			WarehouseOperationMapper.INSTANCE::warehouseOperationToResponse).toList();
+	}
 
-    @Override
-    @Transactional
-    public WarehouseOperationResponse create(WarehouseOperationRequest request) throws WarehouseOperationCreationException {
-        Product product;
-        try {
-            product = productRepository.getReferenceById(request.productId());
+	@Override
+	@Transactional
+	public WarehouseOperationResponse create(
+		WarehouseOperationRequest request) throws WarehouseOperationCreationException {
+		Product product;
+		try {
+			product = productRepository.getReferenceById(request.productId());
 
-            WarehouseOperation warehouseOperation = WarehouseOperationMapper.INSTANCE
-                .requestToWarehouseOperation(request);
+			WarehouseOperation warehouseOperation = WarehouseOperationMapper.INSTANCE.requestToWarehouseOperation(
+				request);
 
-            warehouseOperation.setOperationTime(Instant.now());
-            warehouseOperation.setProduct(product);
-            warehouseOperationRepository.save(warehouseOperation);
+			warehouseOperation.setOperationTime(Instant.now());
+			warehouseOperation.setProduct(product);
+			warehouseOperationRepository.save(warehouseOperation);
 
-            return WarehouseOperationMapper.INSTANCE.warehouseOperationToResponse(warehouseOperation);
-        } catch (RuntimeException e) {
-            throw new WarehouseOperationCreationException(
-                String.format("Incorrect product with id '%s'", request.productId()));
-        }
+			return WarehouseOperationMapper.INSTANCE.warehouseOperationToResponse(warehouseOperation);
+		} catch (RuntimeException e) {
+			throw new WarehouseOperationCreationException(
+				String.format("Incorrect product with id '%s'", request.productId()));
+		}
 
-    }
+	}
+
+	@Override
+	public Integer getTotalQuantityByProductId(Long productId) {
+		return warehouseOperationRepository.getTotalQuantityByProductId(productId);
+	}
 }
