@@ -1,8 +1,8 @@
 package com.wasd.productmicroservice.service.brand;
 
+import com.wasd.eshopcommon.exception.NotFoundException;
 import com.wasd.productmicroservice.data.brand.BrandRequest;
 import com.wasd.productmicroservice.data.brand.BrandResponse;
-import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.persistence.brand.Brand;
 import com.wasd.productmicroservice.persistence.brand.BrandRepository;
 import com.wasd.productmicroservice.util.mapper.BrandMapper;
@@ -24,7 +24,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public BrandResponse findById(Integer id) throws NotFoundException {
+    public BrandResponse findById(Integer id) {
         return BrandMapper.INSTANCE.brandToResponse(
                 brandRepository.findById(id).orElseThrow(()
                         -> new NotFoundException(Brand.class)));

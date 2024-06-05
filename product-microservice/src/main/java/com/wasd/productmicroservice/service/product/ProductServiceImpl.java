@@ -1,9 +1,9 @@
 package com.wasd.productmicroservice.service.product;
 
+import com.wasd.eshopcommon.exception.NotFoundException;
 import com.wasd.productmicroservice.data.product.ProductCreateRequest;
 import com.wasd.productmicroservice.data.product.ProductResponse;
 import com.wasd.productmicroservice.data.warehouseoperation.WarehouseOperationRequest;
-import com.wasd.productmicroservice.exception.common.NotFoundException;
 import com.wasd.productmicroservice.persistence.product.Product;
 import com.wasd.productmicroservice.persistence.product.ProductRepository;
 import com.wasd.productmicroservice.service.warehouseoperation.WarehouseOperationService;

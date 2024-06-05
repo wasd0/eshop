@@ -2,11 +2,14 @@ package com.wasd.productmicroservice.service.category;
 
 import com.wasd.productmicroservice.data.category.CategoryRequest;
 import com.wasd.productmicroservice.data.category.CategoryResponse;
-import com.wasd.productmicroservice.exception.common.NotFoundException;
+
+import java.util.List;
 
 public interface CategoryService {
 
-    CategoryResponse findById(Long id) throws NotFoundException;
+    CategoryResponse findById(Long id);
 
-    CategoryResponse create(CategoryRequest request) throws NotFoundException;
+    CategoryResponse create(CategoryRequest request);
+
+	List<CategoryResponse> findAll();
 }
