@@ -3,14 +3,14 @@ server:
 
 spring:
   datasource:
-    password: postgres
+    password: 
     username: postgres
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5434/postgres
   flyway:
     url: jdbc:postgresql://localhost:5434/postgres
     user: postgres
-    password: postgres
+    password: 
   jpa:
     show-sql: true
     generate-ddl: false
@@ -20,4 +20,4 @@ spring:
     redis:
       host: localhost
       port: 6381
-      password: 123
+      password: 
